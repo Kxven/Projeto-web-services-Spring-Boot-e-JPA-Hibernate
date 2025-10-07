@@ -3,6 +3,8 @@ package com.webproject.course.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -11,6 +13,7 @@ import java.util.Objects;
 public class User implements Serializable{
     private static final long serialVersionUID = 1L;
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -18,6 +21,10 @@ public class User implements Serializable{
     private String email;
     private String phone;
     private String password;
+
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
+
 
     public User(){
 
@@ -69,6 +76,10 @@ public class User implements Serializable{
 
     public void setPassword( String password ){
         this.password = password;
+    }
+
+    public List<Order> getOrders(){
+        return orders;
     }
 
     @Override
